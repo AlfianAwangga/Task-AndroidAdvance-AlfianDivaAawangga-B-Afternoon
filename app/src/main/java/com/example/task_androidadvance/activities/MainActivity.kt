@@ -1,10 +1,13 @@
-package com.example.task_androidadvance
+package com.example.task_androidadvance.activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
+import androidx.navigation.Navigation
+import androidx.navigation.ui.setupWithNavController
+import com.example.task_androidadvance.R
 import com.example.task_androidadvance.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -15,12 +18,18 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         setToolbar()
+        setBottomNavigation()
     }
 
     private fun setToolbar() {
         binding.toolbar.title = "Mobile App"
         binding.toolbar.setTitleTextColor(getColor(R.color.white))
         setSupportActionBar(binding.toolbar)
+    }
+
+    private fun setBottomNavigation() {
+        val navController = Navigation.findNavController(this@MainActivity, R.id.fragment_container)
+        binding.bottomNav.setupWithNavController(navController)
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {

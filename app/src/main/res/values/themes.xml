@@ -8,5 +8,9 @@
         <item name="colorAccent">@color/green</item>
     </style>
 
+    <style name="bottomIndicator" parent="Widget.Material3.BottomNavigationView.ActiveIndicator">
+        <item name="android:color">@color/green</item>
+    </style>
+
     <style name="Theme.TaskAndroidAdvance" parent="Base.Theme.TaskAndroidAdvance" />
 </resources>
