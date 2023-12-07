@@ -1,60 +1,125 @@
 package com.example.task_androidadvance.fragments
 
+import android.app.AlarmManager
+import android.app.NotificationChannel
+import android.app.NotificationManager
+import android.app.PendingIntent
+import android.content.Context.ALARM_SERVICE
+import android.content.Intent
+import android.graphics.Typeface
+import android.os.Build
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import com.example.task_androidadvance.R
+import com.example.task_androidadvance.databinding.FragmentAlarmBinding
+import com.example.task_androidadvance.utils.AlarmReceiver
+import com.google.android.material.timepicker.MaterialTimePicker
+import com.google.android.material.timepicker.TimeFormat
+import java.util.Calendar
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [AlarmFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
-class AlarmFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
+class AlarmFragment : Fragment(), View.OnClickListener {
+    private lateinit var binding: FragmentAlarmBinding
+    private lateinit var picker: MaterialTimePicker
+    private lateinit var calendar: Calendar
+    private lateinit var alarmManager: AlarmManager
+    private lateinit var pendingIntent: PendingIntent
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_alarm, container, false)
+        binding = FragmentAlarmBinding.inflate(inflater, container, false)
+
+        createNotificationChannel()
+        binding.btnSetAlarm.setOnClickListener(this)
+        binding.btnCancelAlarm.setOnClickListener(this)
+        binding.btnSelectTime.setOnClickListener(this)
+
+        return binding.root
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment AlarmFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            AlarmFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
+    private fun createNotificationChannel() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            val nama: CharSequence = "Alfian Diva Awangga"
+            val deskripsi = "Channel AlarmManager"
+            val importance = NotificationManager.IMPORTANCE_HIGH
+            val channel = NotificationChannel("Alfian", nama, importance)
+            channel.description = deskripsi
+
+            val notificationManager = context?.getSystemService(NotificationManager::class.java)
+            notificationManager?.createNotificationChannel(channel)
+
+        }
+    }
+
+    override fun onClick(v: View) {
+        when (v.id) {
+            R.id.btn_select_time -> {
+                showTimePicker()
             }
+
+            R.id.btn_set_alarm -> {
+                setAlarm()
+            }
+
+            R.id.btn_cancel_alarm -> {
+                cancelAlarm()
+            }
+        }
+    }
+
+    private fun showTimePicker() {
+        picker = MaterialTimePicker.Builder()
+            .setTimeFormat(TimeFormat.CLOCK_24H)
+            .setHour(12)
+            .setMinute(0)
+            .setTitleText("Select Alarm Time")
+            .build()
+
+        picker.show(requireActivity().supportFragmentManager, "Alfian")
+
+        picker.addOnPositiveButtonClickListener {
+            binding.tvTimeSelected.text =
+                String.format("%02d", picker.hour) + " : " + String.format("%02d", picker.minute)
+            binding.tvTimeSelected.setTypeface(Typeface.DEFAULT_BOLD)
+            binding.tvTimeSelected.textSize = 48f
+
+            calendar = Calendar.getInstance()
+            calendar[Calendar.HOUR_OF_DAY] = picker.hour
+            calendar[Calendar.MINUTE] = picker.minute
+            calendar[Calendar.SECOND] = 0
+            calendar[Calendar.MILLISECOND] = 0
+        }
+    }
+
+    private fun setAlarm() {
+        val intent = Intent(activity, AlarmReceiver::class.java)
+        alarmManager = context?.getSystemService(ALARM_SERVICE) as AlarmManager
+        pendingIntent =
+            PendingIntent.getBroadcast(activity, 0, intent, PendingIntent.FLAG_IMMUTABLE)
+
+        alarmManager.setRepeating(
+            AlarmManager.RTC_WAKEUP,
+            calendar.timeInMillis,
+            AlarmManager.INTERVAL_DAY,
+            pendingIntent
+        )
+
+        Toast.makeText(activity, "Alarm is set successfully", Toast.LENGTH_SHORT).show()
+    }
+
+    private fun cancelAlarm() {
+        val intent = Intent(activity, AlarmReceiver::class.java)
+        alarmManager = context?.getSystemService(ALARM_SERVICE) as AlarmManager
+        pendingIntent =
+            PendingIntent.getBroadcast(activity, 0, intent, PendingIntent.FLAG_IMMUTABLE)
+
+        alarmManager.cancel(pendingIntent)
+
+        Toast.makeText(activity, "Alarm is cancelled", Toast.LENGTH_SHORT).show()
     }
 }
