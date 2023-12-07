@@ -5,9 +5,10 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.task_androidadvance.databinding.ListUserBinding
-import com.example.task_androidadvance.models.UserModel
+import com.example.task_androidadvance.models.Users
+import com.example.task_androidadvance.models.UserItem
 
-class UserAdapter(private val context: Context?, private val list: MutableList<UserModel>) : RecyclerView.Adapter<UserAdapter.ViewHolder>(){
+class UserAdapter(private val context: Context?, private val list: MutableList<UserItem>) : RecyclerView.Adapter<UserAdapter.ViewHolder>(){
 
     class ViewHolder(val binding: ListUserBinding) : RecyclerView.ViewHolder(binding.root)
 
@@ -23,12 +24,18 @@ class UserAdapter(private val context: Context?, private val list: MutableList<U
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         with(holder) {
             with(list[position]) {
-                binding.tvUserNama.text = this.nama
+                binding.tvUserNama.text = this.name
                 binding.tvUserUsername.text = this.username
                 binding.tvUserEmail.text = this.email
                 binding.tvUserPhone.text = this.phone
             }
         }
+    }
+
+    fun setData(data: Users) {
+        list.clear()
+        list.addAll(data)
+        notifyDataSetChanged()
     }
 
 
