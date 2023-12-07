@@ -8,8 +8,13 @@ import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.navigation.Navigation
 import androidx.navigation.ui.setupWithNavController
+import androidx.work.Constraints
+import androidx.work.NetworkType
+import androidx.work.OneTimeWorkRequest
+import androidx.work.WorkManager
 import com.example.task_androidadvance.R
 import com.example.task_androidadvance.databinding.ActivityMainBinding
+import com.example.task_androidadvance.utils.Worker
 import com.google.android.material.navigation.NavigationView
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
@@ -20,9 +25,23 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        OneTimeWork()
         setToolbar()
         setBottomNavigation()
         setNavigationDrawer()
+    }
+
+    private fun OneTimeWork() {
+        val constraints = Constraints.Builder()
+            .setRequiredNetworkType(NetworkType.NOT_REQUIRED)
+            .setRequiresCharging(true)
+            .build()
+
+        val work = OneTimeWorkRequest.Builder(Worker::class.java)
+            .setConstraints(constraints)
+            .build()
+
+        WorkManager.getInstance(this).enqueue(work)
     }
 
     private fun setToolbar() {

@@ -52,8 +52,8 @@ dependencies {
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
 
     // coroutines
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.2")
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.1")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.1")
     // lottie
     implementation("com.airbnb.android:lottie:4.2.0")
     //retrofit
@@ -63,4 +63,6 @@ dependencies {
     implementation("com.squareup.okhttp3:logging-interceptor:4.9.2")
     //liveData
     implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.6.2")
+    //workManager
+    implementation("androidx.work:work-runtime-ktx:2.9.0")
 }
