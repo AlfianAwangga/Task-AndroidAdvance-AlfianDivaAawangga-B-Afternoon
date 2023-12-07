@@ -1,4 +1,4 @@
-package com.example.task_androidadvance.adapters
+package com.example.task_androidadvance.views.adapters
 
 import android.content.Context
 import android.view.LayoutInflater

@@ -1,4 +1,4 @@
-package com.example.task_androidadvance.fragments
+package com.example.task_androidadvance.views.fragments
 
 import android.app.AlarmManager
 import android.app.NotificationChannel

@@ -1,4 +1,4 @@
-package com.example.task_androidadvance.fragments
+package com.example.task_androidadvance.views.fragments
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -7,7 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.task_androidadvance.R
-import com.example.task_androidadvance.adapters.UserAdapter
+import com.example.task_androidadvance.views.adapters.UserAdapter
 import com.example.task_androidadvance.databinding.FragmentHomeBinding
 import com.example.task_androidadvance.models.UserModel
 
