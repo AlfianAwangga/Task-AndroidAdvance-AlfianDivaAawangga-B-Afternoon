@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="nama">
+        <item>Leanne Graham</item>
+        <item>Ervin Howell</item>
+        <item>Clementine Bauch</item>
+        <item>Patricia Lebsack</item>
+        <item>Patricia Lebsack</item>
+    </string-array>
+    <string-array name="username">
+        <item>Bret</item>
+        <item>Antonette</item>
+        <item>Samantha</item>
+        <item>Karianne</item>
+        <item>Karianne</item>
+    </string-array>
+    <string-array name="email">
+        <item>Sincere@april.biz</item>
+        <item>Nathan@yesenia.net</item>
+        <item>Shanna@melissa.tv</item>
+        <item>Julianne.OConner@kory.org</item>
+        <item>Julianne.OConner@kory.org</item>
+    </string-array>
+    <string-array name="phone">
+        <item>1-770-736-8031 x56442</item>
+        <item>010-692-6593 x09125</item>
+        <item>1-463-123-4447</item>
+        <item>493-170-9623 x156</item>
+        <item>493-170-9623 x156</item>
+    </string-array>
+</resources>

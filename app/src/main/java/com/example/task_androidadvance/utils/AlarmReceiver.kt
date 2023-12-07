@@ -10,11 +10,12 @@ import androidx.core.app.ActivityCompat
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import com.example.task_androidadvance.R
+import com.example.task_androidadvance.activities.MainActivity
 import com.example.task_androidadvance.fragments.AlarmFragment
 
 class AlarmReceiver: BroadcastReceiver(){
     override fun onReceive(context: Context?, intent: Intent?) {
-        val i = Intent(context,AlarmFragment::class.java)
+        val i = Intent(context,MainActivity::class.java)
         intent!!.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
 
         val pendingIntent = PendingIntent.getActivity(context,0,i, PendingIntent.FLAG_IMMUTABLE)
