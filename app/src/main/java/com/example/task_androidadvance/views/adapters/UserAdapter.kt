@@ -5,8 +5,8 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.task_androidadvance.databinding.ListUserBinding
-import com.example.task_androidadvance.models.Users
 import com.example.task_androidadvance.models.UserItem
+import com.example.task_androidadvance.models.Users
 
 class UserAdapter(private val context: Context?, private val list: MutableList<UserItem>) : RecyclerView.Adapter<UserAdapter.ViewHolder>(){
 
