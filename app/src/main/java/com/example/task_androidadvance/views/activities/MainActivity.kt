@@ -1,11 +1,12 @@
 package com.example.task_androidadvance.views.activities
 
-import androidx.appcompat.app.AppCompatActivity
+import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
+import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.Navigation
 import androidx.navigation.ui.setupWithNavController
 import androidx.work.Constraints
@@ -75,7 +76,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         }
         when (item.itemId) {
             R.id.favorite -> {
-                Toast.makeText(this, "Menu Favorite Di-klik", Toast.LENGTH_SHORT).show()
+                val intent = Intent(this, FavoriteActivity::class.java)
+                startActivity(intent)
             }
 
             R.id.bookmark -> {

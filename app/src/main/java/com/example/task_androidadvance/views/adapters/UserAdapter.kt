@@ -8,7 +8,12 @@ import com.example.task_androidadvance.databinding.ListUserBinding
 import com.example.task_androidadvance.models.UserItem
 import com.example.task_androidadvance.models.Users
 
-class UserAdapter(private val context: Context?, private val list: MutableList<UserItem>) : RecyclerView.Adapter<UserAdapter.ViewHolder>(){
+class UserAdapter(
+    private val context: Context?, private val list: MutableList<UserItem>,
+    val onItemCheckedChange: (position: Int, isChecked: Boolean, item: UserItem) -> Unit
+) :
+    RecyclerView.Adapter<UserAdapter.ViewHolder>() {
+
 
     class ViewHolder(val binding: ListUserBinding) : RecyclerView.ViewHolder(binding.root)
 
@@ -28,6 +33,10 @@ class UserAdapter(private val context: Context?, private val list: MutableList<U
                 binding.tvUserUsername.text = this.username
                 binding.tvUserEmail.text = this.email
                 binding.tvUserPhone.text = this.phone
+
+                binding.btnFav.setOnCheckedChangeListener { _, isChecked ->
+                    onItemCheckedChange.invoke(position, isChecked, list[position])
+                }
             }
         }
     }

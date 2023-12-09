@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="125dp"
     android:layout_marginBottom="12dp"
@@ -11,11 +12,11 @@
         android:layout_height="match_parent">
 
         <TextView
-            android:id="@+id/tv_user_nama"
+            android:id="@+id/tv_fav_nama"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="32dp"
             android:text="Nama"
             android:textSize="20dp"
             android:textStyle="bold"
@@ -23,38 +24,20 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/tv_user_username"
+            android:id="@+id/tv_fav_username"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:layout_marginBottom="32dp"
             android:text="Username"
-            app:layout_constraintStart_toStartOf="@+id/tv_user_nama"
-            app:layout_constraintTop_toBottomOf="@+id/tv_user_nama" />
-
-        <TextView
-            android:id="@+id/tv_user_email"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="email"
-            app:layout_constraintStart_toStartOf="@+id/tv_user_username"
-            app:layout_constraintTop_toBottomOf="@+id/tv_user_username" />
-
-        <TextView
-            android:id="@+id/tv_user_phone"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="phone"
-            app:layout_constraintStart_toStartOf="@+id/tv_user_email"
-            app:layout_constraintTop_toBottomOf="@+id/tv_user_email" />
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/tv_fav_nama" />
 
         <ToggleButton
-            android:id="@+id/btn_fav"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:id="@+id/btn_delete"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
             android:layout_marginEnd="20dp"
-            android:background="@drawable/selector_favorite"
+            android:background="@drawable/icon_delete"
             android:focusable="false"
             android:focusableInTouchMode="false"
             android:textOff=""
